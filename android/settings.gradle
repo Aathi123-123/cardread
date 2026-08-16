@@ -18,18 +18,31 @@ pluginManagement {
   // Ensure Kotlin Gradle plugin version matches Gradle's bundled Kotlin libraries
   resolutionStrategy {
     eachPlugin { details ->
-      def requestedId = null
+      def requestedStr = null
       try {
-        requestedId = details.requested.id.id
+        requestedStr = details.requested.id.id
       } catch (ignored) {
         try {
-          requestedId = details.requested.id
+          requestedStr = details.requested.id
         } catch (ignored2) {
-          requestedId = details.requested.toString()
+          requestedStr = details.requested.toString()
         }
       }
-      if (requestedId != null && (requestedId == 'org.jetbrains.kotlin.jvm' || requestedId.startsWith('org.jetbrains.kotlin'))) {
+
+      // Force the Kotlin Gradle plugin to a specific version and map to its module
+      if (requestedStr != null && (requestedStr == 'org.jetbrains.kotlin.jvm' || requestedStr.startsWith('org.jetbrains.kotlin'))) {
         useVersion('2.3.0')
+        // Ensure the plugin resolution uses the exact artifact coordinate
+        useModule('org.jetbrains.kotlin:kotlin-gradle-plugin:2.3.0')
+      }
+
+      // Additional defensive mapping for other possible request shapes
+      try {
+        if (details.requested.group == 'org.jetbrains.kotlin') {
+          useModule('org.jetbrains.kotlin:kotlin-gradle-plugin:2.3.0')
+        }
+      } catch (ignored3) {
+        // ignore
       }
     }
   }
