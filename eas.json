@@ -1,9 +1,12 @@
 {
   "build": {
     "development": {
-      "android": {
-        "buildType": "apk"
-      }
+        "env": {
+          "NPM_CONFIG_LEGACY_PEER_DEPS": "true"
+        },
+        "android": {
+          "buildType": "apk"
+        }
     },
     "production": {
       "android": {
