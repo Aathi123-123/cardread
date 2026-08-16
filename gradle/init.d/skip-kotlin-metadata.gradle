@@ -1,0 +1,16 @@
+// Init script to add -Xskip-metadata-version-check to all KotlinCompile tasks
+gradle.projectsLoaded { gradleInstance ->
+  gradleInstance.rootProjectAllprojects { p ->
+    try {
+      p.tasks.matching { it.class.name == 'org.jetbrains.kotlin.gradle.tasks.KotlinCompile' }.all { kotlinCompile ->
+        try {
+          kotlinCompile.kotlinOptions.freeCompilerArgs += ['-Xskip-metadata-version-check']
+        } catch (e) {
+          // ignore if kotlinOptions not available yet
+        }
+      }
+    } catch (ignored) {
+      // ignore
+    }
+  }
+}
