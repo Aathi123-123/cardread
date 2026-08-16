@@ -1,0 +1,21 @@
+// Gradle init script to force a specific Kotlin Gradle plugin module/version
+// This runs early for all included builds and should help enforce the plugin
+// coordinate even when included builds declare their own plugin classpaths.
+
+settingsEvaluated { settings ->
+  try {
+    settings.pluginManagement.resolutionStrategy.eachPlugin { details ->
+      def requestedStr = null
+      try {
+        requestedStr = details.requested.id.id
+      } catch (ignored) {
+        requestedStr = details.requested.toString()
+      }
+      if (requestedStr != null && requestedStr.startsWith('org.jetbrains.kotlin')) {
+        details.useModule('org.jetbrains.kotlin:kotlin-gradle-plugin:2.3.0')
+      }
+    }
+  } catch (ignored) {
+    // If pluginManagement or resolutionStrategy isn't available here, ignore.
+  }
+}
