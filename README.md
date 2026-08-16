@@ -1,64 +1,124 @@
-AI Smart Card Organizer — Minimal Scaffold
+<div align="center">
 
-This repository contains a starter Expo React Native app that implements the core architecture and a working scan → verify → save flow with mock OCR/AI services and a local SQLite store.
+# 🪪 AI Smart Card Organizer
 
-Quick start
+### Minimal Scaffold — Scan → Verify → Save
 
-1. Install dependencies:
+A starter Expo React Native app with a working scan → verify → save flow, mock OCR/AI extraction services, and local SQLite storage.
+
+![Expo](https://img.shields.io/badge/Expo-000020?style=for-the-badge&logo=expo&logoColor=white)
+![React Native](https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![SQLite](https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white)
+![License](https://img.shields.io/badge/status-scaffold-orange?style=for-the-badge)
+
+</div>
+
+---
+
+## 📖 Overview
+
+This repository contains the core architecture for an AI-powered smart card organizer — think business cards, ID cards, or membership cards captured with your phone camera, automatically parsed, and saved to a local database.
+
+The scaffold ships with **mock** OCR/AI services so you can run the full flow end-to-end immediately, then swap in production integrations when you're ready.
+
+---
+
+## ✨ What's Included
+
+| Feature | Description |
+|---|---|
+| 🧭 **Navigation** | Home, Scan, Verify, and Cards list screens |
+| 📷 **Capture** | Camera & gallery capture via `expo-image-picker` |
+| 🤖 **Mock AI/OCR** | Drop-in replaceable extraction services |
+| 💾 **Local Storage** | Persistent storage using `expo-sqlite` |
+
+---
+
+## 🚀 Quick Start
+
+**1. Install dependencies**
 
 ```bash
 npm install
 ```
 
-2. Start Expo:
+**2. Start Expo**
 
 ```bash
 npm start
 ```
 
-3. Use the Expo Go app or run on an emulator.
+**3. Run the app**
 
-What this scaffold includes
-- Basic navigation and screens: Home, Scan, Verify, Cards list
-- Camera/gallery capture (uses Expo ImagePicker)
-- Mock OCR and AI extraction services (replaceable)
-- Local SQLite storage via `expo-sqlite`
+Scan the QR code with the **Expo Go** app, or launch it on an emulator/simulator.
 
-Next steps
-- Integrate on-device OCR (Tesseract / MLKit / Vision)
-- Integrate a production AI extraction/classification backend
-- Improve camera UX (edge detection, auto-capture)
-- Add encryption, biometric lock, and backup
+---
 
-Build APK (EAS)
+## 🗺️ Roadmap / Next Steps
 
-1. Install EAS CLI (requires Node):
+- [ ] Integrate on-device OCR (Tesseract / ML Kit / Vision)
+- [ ] Connect a production AI extraction & classification backend
+- [ ] Improve camera UX — edge detection & auto-capture
+- [ ] Add encryption, biometric lock, and backup support
+
+---
+
+## 📦 Build an APK (EAS)
+
+<details>
+<summary><strong>Click to expand build instructions</strong></summary>
+
+**1. Install the EAS CLI**
 
 ```bash
 npm install -g eas-cli
 ```
 
-2. Login and configure Expo account:
+**2. Log in to your Expo account**
 
 ```bash
 eas login
 ```
 
-3. Configure credentials (you'll be prompted):
+**3. Configure credentials**
 
 ```bash
 eas credentials
 ```
 
-4. Start an APK build:
+**4. Start the build**
 
 ```bash
 npm run eas:build
 ```
 
-The build will run in the cloud and produce a downloadable APK. For fully offline or local native builds you can `eas build --local` with required native toolchains.
+Your APK will build in the cloud and be available as a download link once complete.
 
-Notes:
-- Update `app.json` `expo.android.package` to your app id (reverse-domain, e.g., `com.yourcompany.aismartcard`).
-- You can change the `eas.json` profile name or settings to produce an AAB instead of an APK.
-- If you need help configuring signing keys or automating credentials, I can walk through those steps.
+> 💡 For fully offline / local native builds, use `eas build --local` (requires the relevant native toolchains installed).
+
+</details>
+
+---
+
+## ⚙️ Configuration Notes
+
+> [!IMPORTANT]
+> Update the Android package identifier in `app.json` before building:
+> ```json
+> "expo": {
+>   "android": {
+>     "package": "com.yourcompany.aismartcard"
+>   }
+> }
+> ```
+
+- Rename or duplicate the profile in `eas.json` to switch between **APK** and **AAB** build outputs.
+- Need help with signing keys or credential automation? Just ask — happy to walk through it.
+
+---
+
+<div align="center">
+
+Made with 🃏 + 🧠 · Expo React Native Scaffold
+
+</div>
