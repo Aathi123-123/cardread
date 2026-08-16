@@ -25,6 +25,16 @@ allprojects {
   }
 }
 
+// Workaround: allow Kotlin compiler to skip metadata-version checks when
+// compiling mixed Kotlin metadata versions (temporary diagnostic fix).
+subprojects {
+  afterEvaluate { proj ->
+    proj.tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach { kotlinCompile ->
+      kotlinCompile.kotlinOptions.freeCompilerArgs += ['-Xskip-metadata-version-check']
+    }
+  }
+}
+
 apply plugin: "expo-root-project"
 apply plugin: "com.facebook.react.rootproject"
 // @generated begin expo-camera-import - expo prebuild (DO NOT MODIFY) sync-f244f4f3d8bf7229102e8f992b525b8602c74770
