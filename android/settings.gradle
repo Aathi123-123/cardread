@@ -17,8 +17,18 @@ pluginManagement {
   includeBuild(expoPluginsPath)
   // Ensure Kotlin Gradle plugin version matches Gradle's bundled Kotlin libraries
   resolutionStrategy {
-    eachPlugin { requested ->
-      if (requested.id.id == 'org.jetbrains.kotlin.jvm' || requested.id.id.startsWith('org.jetbrains.kotlin')) {
+    eachPlugin { details ->
+      def requestedId = null
+      try {
+        requestedId = details.requested.id.id
+      } catch (ignored) {
+        try {
+          requestedId = details.requested.id
+        } catch (ignored2) {
+          requestedId = details.requested.toString()
+        }
+      }
+      if (requestedId != null && (requestedId == 'org.jetbrains.kotlin.jvm' || requestedId.startsWith('org.jetbrains.kotlin'))) {
         useVersion('2.3.0')
       }
     }
